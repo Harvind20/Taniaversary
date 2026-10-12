@@ -551,38 +551,57 @@ body::after {
   50% { transform: translateY(-4px); }
 }
 
-/* Envelope Front Folded Pocket */
+/* Envelope Front Folded Pocket (Seamless 3-fold origami construction) */
 .envelope-pocket {
   position: absolute;
   inset: 0;
   z-index: 4;
   pointer-events: none;
-  background:
-    linear-gradient(to top right, #91243e 50%, transparent 50%) left bottom / 50% 100% no-repeat,
-    linear-gradient(to top left, #852037 50%, transparent 50%) right bottom / 50% 100% no-repeat,
-    linear-gradient(to bottom, transparent 35%, #7a1d33 100%);
   border-radius: 0 0 12px 12px;
+  overflow: hidden;
 }
 
-/* Envelope Top Flap */
+.pocket-left {
+  position: absolute;
+  inset: 0;
+  background: #841d35;
+  clip-path: polygon(0 0, 50.5% 50.5%, 0 100%);
+}
+
+.pocket-right {
+  position: absolute;
+  inset: 0;
+  background: #7a1930;
+  clip-path: polygon(100% 0, 49.5% 50.5%, 100% 100%);
+}
+
+.pocket-bottom {
+  position: absolute;
+  inset: 0;
+  background: #93243e;
+  clip-path: polygon(-1px 101%, 50% 46%, 101% 101%);
+  filter: drop-shadow(0 -3px 6px rgba(50, 8, 18, 0.4));
+}
+
+/* Envelope Top Flap (Fully covers and overlaps pocket with zero gaps) */
 .envelope-flap {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 106px;
+  height: 57%;
   background: #a32b49;
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  clip-path: polygon(-1px -1px, 101% -1px, 50% 100%);
   transform-origin: top center;
   transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 6;
-  border-radius: 10px 10px 0 0;
+  filter: drop-shadow(0 4px 7px rgba(50, 8, 18, 0.35));
 }
 
-/* Wax Seal Button (Touch target optimized) */
+/* Wax Seal Button (Touch target optimized, centered over flap tip seam) */
 .wax-seal-btn {
   position: absolute;
-  top: 98px;
+  top: 51%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: transparent;
@@ -639,6 +658,7 @@ body::after {
 .envelope-wrapper.opened .envelope-flap {
   transform: rotateX(180deg);
   z-index: 1;
+  filter: none;
   transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.01s ease 0.22s;
 }
 
@@ -1396,14 +1416,6 @@ body::after {
   .envelope-wrapper.card-open .postcard-slider {
     transform: translateY(-135px);
     z-index: 5;
-  }
-
-  .envelope-flap {
-    height: 122px;
-  }
-
-  .wax-seal-btn {
-    top: 114px;
   }
 
   .wax-seal-btn:hover {
