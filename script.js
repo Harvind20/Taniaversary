@@ -648,6 +648,16 @@ function getPlaceholderImage(index) {
   return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect width="100%" height="100%" fill="${encodeURIComponent(t.bg)}"/><text x="50%" y="45%" font-size="52" text-anchor="middle" dominant-baseline="central">${t.icon}</text><text x="50%" y="72%" font-size="19" font-family="sans-serif" font-weight="bold" fill="%239e2542" text-anchor="middle">${encodeURIComponent(t.text)}</text></svg>`;
 }
 
+// Safe Unicode grapheme cluster splitter for seamless emoji typing
+function splitGraphemes(text) {
+  if (!text) return [];
+  if (typeof Intl !== "undefined" && Intl.Segmenter) {
+    const segmenter = new Intl.Segmenter(undefined, { granularity: "grapheme" });
+    return Array.from(segmenter.segment(text), s => s.segment);
+  }
+  return Array.from(text);
+}
+
 function startTypewriterAnimation() {
   const typewriterBody = document.getElementById("typewriterBody");
   typewriterBody.innerHTML = "";
@@ -655,8 +665,9 @@ function startTypewriterAnimation() {
   typewriterTimeouts = [];
   typewriterActive = true;
 
-  const paragraphs = (CONFIG && CONFIG.letterParagraphs) ? CONFIG.letterParagraphs : [];
-  const closingText = (CONFIG && CONFIG.letterClosing) ? CONFIG.letterClosing : "";
+  const rawParagraphs = (CONFIG && CONFIG.letterParagraphs) ? CONFIG.letterParagraphs : [];
+  const paragraphs = rawParagraphs.map(p => splitGraphemes(p));
+  const closingChars = (CONFIG && CONFIG.letterClosing) ? splitGraphemes(CONFIG.letterClosing) : [];
 
   let currentParaIndex = 0;
   let currentCharIndex = 0;
@@ -673,15 +684,15 @@ function startTypewriterAnimation() {
     if (!typewriterActive) return;
 
     if (currentParaIndex < paragraphs.length) {
-      const currentParaText = paragraphs[currentParaIndex];
+      const currentChars = paragraphs[currentParaIndex];
 
-      if (currentCharIndex < currentParaText.length) {
-        const char = currentParaText[currentCharIndex];
+      if (currentCharIndex < currentChars.length) {
+        const char = currentChars[currentCharIndex];
         cursor.insertAdjacentText("beforebegin", char);
         currentCharIndex++;
 
         // Typing speed between 22ms and 36ms
-        const delay = (char === "." || char === "!" || char === "?") ? 280 : (char === "," ? 120 : 26);
+        const delay = (char === "." || char === "!" || char === "?") ? 260 : (char === "," ? 110 : 25);
         const t = setTimeout(typeNextCharacter, delay);
         typewriterTimeouts.push(t);
       } else {
@@ -706,6 +717,8 @@ function startTypewriterAnimation() {
 
   function typeClosing() {
     cursor.remove();
+    if (!closingChars.length) return;
+
     const closingP = document.createElement("p");
     closingP.className = "letter-closing";
     typewriterBody.appendChild(closingP);
@@ -714,10 +727,10 @@ function startTypewriterAnimation() {
     let closingCharIdx = 0;
     function typeClosingChar() {
       if (!typewriterActive) return;
-      if (closingCharIdx < closingText.length) {
-        cursor.insertAdjacentText("beforebegin", closingText[closingCharIdx]);
+      if (closingCharIdx < closingChars.length) {
+        cursor.insertAdjacentText("beforebegin", closingChars[closingCharIdx]);
         closingCharIdx++;
-        const t = setTimeout(typeClosingChar, 34);
+        const t = setTimeout(typeClosingChar, 30);
         typewriterTimeouts.push(t);
       } else {
         // Done typing!
