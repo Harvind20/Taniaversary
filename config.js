@@ -36,8 +36,8 @@ const CONFIG = {
   song: {
     title: "Baby Blue",
     artist: "Daniel Caesar",
-    // Put your MP3 file in assets/music/song.mp3 or specify a direct audio link
-    src: "assets/music/song.mp3",
+    // Put your MP3 file in music/song.mp3 or pictures/song.mp3
+    src: "music/song.mp3",
     // If no custom mp3 file is added yet, a romantic acoustic music box melody
     // plays automatically so your website is never silent!
     useSynthFallback: true

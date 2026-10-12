@@ -71,10 +71,23 @@ function initAudioSystem() {
   const soundToggleBtn = document.getElementById("soundToggleBtn");
   const soundIcon = document.getElementById("soundIcon");
 
-  // Attempt to set custom audio source if available
-  if (CONFIG.song && CONFIG.song.src) {
-    bgAudio.src = CONFIG.song.src;
-  }
+  // Audio candidate paths in order of preference
+  const audioCandidates = [
+    (CONFIG.song && CONFIG.song.src) ? CONFIG.song.src : null,
+    "music/song.mp3",
+    "music/babyblue.mp3",
+    "music/Baby Blue.mp3",
+    "music/baby_blue.mp3",
+    "pictures/song.mp3",
+    "pictures/babyblue.mp3",
+    "pictures/Baby Blue.mp3",
+    "assets/music/song.mp3",
+    "assets/music/babyblue.mp3",
+    "song.mp3"
+  ].filter(Boolean);
+
+  let currentCandidateIdx = 0;
+  bgAudio.src = audioCandidates[0];
 
   // Play / Pause toggle
   playPauseBtn.addEventListener("click", (e) => {
@@ -106,7 +119,12 @@ function initAudioSystem() {
   });
 
   bgAudio.addEventListener("error", () => {
-    console.log("Custom MP3 not found. Switching to built-in romantic music-box synth fallback!");
+    currentCandidateIdx++;
+    if (currentCandidateIdx < audioCandidates.length) {
+      bgAudio.src = audioCandidates[currentCandidateIdx];
+    } else {
+      console.log("Custom MP3 not found. Switching to built-in romantic music-box synth fallback!");
+    }
   });
 }
 
@@ -544,15 +562,23 @@ function initLetterEngine() {
 
 // Handle multi-format image loading with fallback
 function attachImageFallback(img, originalSrc, index) {
-  let triedPng = false;
-  let triedJpeg = false;
+  const num = index + 1;
+  const candidates = [
+    originalSrc,
+    `pictures/photo${num}.png`,
+    `pictures/photo${num}.jpeg`,
+    `pictures/photo${num}.webp`,
+    `pictures/${num}.jpg`,
+    `pictures/${num}.png`,
+    `pictures/${num}.jpeg`,
+    `images/photo${num}.jpg`,
+    `images/photo${num}.png`
+  ];
+  let attemptIdx = 0;
   img.onerror = () => {
-    if (!triedPng && originalSrc.endsWith(".jpg")) {
-      triedPng = true;
-      img.src = originalSrc.replace(".jpg", ".png");
-    } else if (!triedJpeg && originalSrc.endsWith(".png")) {
-      triedJpeg = true;
-      img.src = originalSrc.replace(".png", ".jpeg");
+    attemptIdx++;
+    if (attemptIdx < candidates.length) {
+      img.src = candidates[attemptIdx];
     } else {
       img.src = getPlaceholderImage(index);
     }

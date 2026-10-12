@@ -1,2 +1,6 @@
-# Place your custom song here as 'song.mp3'
-# Example: Sa Bawat Sandali by Amiel Sol
+🎵 SONG PLACEMENT
+==================================================
+Place your song file here:
+  song.mp3 (or in the root 'music' folder)
+
+Song: "Baby Blue" by Daniel Caesar
