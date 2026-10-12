@@ -41,5 +41,63 @@ const CONFIG = {
     // If no custom mp3 file is added yet, a romantic acoustic music box melody
     // plays automatically so your website is never silent!
     useSynthFallback: true
-  }
+  },
+
+  // ========================================================
+  // 📸 PHOTO SCRAPBOOK / MEMORIES SECTION (Matches Reference Image)
+  // Place your photos in assets/images/ (photo1.jpg, photo2.jpg, etc.)
+  // or put web image URLs!
+  // ========================================================
+  memoriesTitle: "Our Favorite Moments 💕",
+  memoriesSubtitle: "Every picture tells our story",
+  memories: [
+    {
+      id: 1,
+      image: "assets/images/photo1.jpg",
+      caption: "Thank you for being my happiness, my comfort, and my favorite person.",
+      style: "polaroid",
+      sticker: "🍀",
+      rotation: -2
+    },
+    {
+      id: 2,
+      image: "assets/images/photo2.jpg",
+      caption: "Another month, another reason to be grateful for you.",
+      style: "stamp", // Scalloped postage stamp edge!
+      sticker: "🍀",
+      rotation: 3
+    },
+    {
+      id: 3,
+      image: "assets/images/photo3.jpg",
+      caption: "Here's to us and many more memories together.",
+      style: "polaroid",
+      sticker: "🍀",
+      rotation: 1
+    },
+    {
+      id: 4,
+      image: "assets/images/photo4.jpg",
+      caption: "I cherish every moment with you and can't wait to create more memories together. I love you!",
+      style: "stamp", // Scalloped postage stamp edge!
+      sticker: "🍀",
+      rotation: -2.5
+    },
+    {
+      id: 5,
+      image: "assets/images/photo5.jpg",
+      caption: "Every day with you is a blessing, and I'm excited for all the months ahead.",
+      style: "stamp", // Scalloped postage stamp edge!
+      sticker: "🍀",
+      rotation: 2
+    },
+    {
+      id: 6,
+      image: "assets/images/photo6.jpg",
+      caption: "Forever grateful for you and all of our little adventures together. 💕",
+      style: "polaroid",
+      sticker: "🍀",
+      rotation: -1.5
+    }
+  ]
 };

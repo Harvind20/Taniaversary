@@ -799,19 +799,72 @@ body::after {
 }
 
 /* ========================================================
-   SCREEN 4: FULL LOVE LETTER (IOS SCROLL OPTIMIZED)
+   SCREEN 4: FULL LOVE LETTER & SCRAPBOOK (IOS SCROLL OPTIMIZED)
    ======================================================== */
+#screen-letter {
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  padding: 0;
+  display: none;
+}
+
+#screen-letter.active {
+  display: flex;
+}
+
 .letter-scroll-wrapper {
   width: 100%;
-  height: 100%;
-  padding: 8px 4px 20px;
+  min-height: 100%;
+  height: auto;
+  padding: 12px 10px 80px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  position: relative;
 }
 
+/* Navigation Switcher Tabs (Letter vs Scrapbook) */
+.card-nav-tabs {
+  display: flex;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1.5px solid #f1c3ce;
+  border-radius: 30px;
+  padding: 4px;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 15px rgba(160, 40, 70, 0.12);
+  position: sticky;
+  top: 4px;
+  z-index: 40;
+  width: 100%;
+  max-width: 280px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 7px 14px;
+  border-radius: 22px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+.tab-btn.active {
+  background: var(--accent-burgundy);
+  color: #ffffff;
+  box-shadow: 0 3px 8px rgba(140, 29, 55, 0.25);
+}
+
+/* Section A: Parchment Letter */
 .parchment-letter {
   background: var(--card-bg);
   border: 1.5px solid #f1ccd5;
@@ -823,6 +876,11 @@ body::after {
   width: 100%;
   position: relative;
   line-height: 1.8;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.parchment-letter.hidden-view {
+  display: none;
 }
 
 .letter-top-accent {
@@ -913,13 +971,212 @@ body::after {
   background: #fde8ed;
 }
 
-.letter-footer {
-  margin-top: 20px;
+/* Jump to Photos Button */
+.letter-jump-section {
+  margin-top: 24px;
   display: flex;
   justify-content: center;
 }
 
-/* Circular Return Button */
+.btn-jump-photos {
+  background: #fff0f3;
+  border: 1.5px solid #f1c3ce;
+  border-radius: 24px;
+  padding: 8px 18px;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--accent-burgundy);
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(160, 40, 70, 0.1);
+  transition: all 0.2s ease;
+}
+
+.btn-jump-photos:active {
+  transform: scale(0.96);
+  background: #ffe3e9;
+}
+
+/* ========================================================
+   SECTION B: SCRAPBOOK MEMORY BOARD (MATCHES REFERENCE PHOTO)
+   ======================================================== */
+.scrapbook-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.scrapbook-section.hidden-view {
+  display: none;
+}
+
+.scrapbook-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.scrapbook-title {
+  font-size: 28px;
+  color: var(--accent-burgundy);
+  font-weight: 700;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.scrapbook-subtitle {
+  font-size: 18px;
+  color: var(--text-muted);
+}
+
+.scrapbook-grid {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  align-items: center;
+}
+
+/* Individual Scrapbook Item (Photo + Caption + Sticker) */
+.scrapbook-item {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+/* Four-Leaf Clover Sticker (Matches Reference Photo 🍀) */
+.clover-sticker {
+  position: absolute;
+  top: -12px;
+  right: -6px;
+  font-size: 30px;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
+  z-index: 15;
+  animation: floatClover 3s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes floatClover {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-4px) rotate(6deg); }
+}
+
+/* Style 1: SCALLOPED POSTAGE STAMP FRAME */
+.stamp-card {
+  position: relative;
+  background: #ffffff;
+  padding: 8px;
+  border-radius: 2px;
+  box-shadow: 0 10px 24px rgba(120, 20, 40, 0.20);
+  cursor: pointer;
+  filter: drop-shadow(0 4px 10px rgba(160, 40, 70, 0.16));
+  width: 90%;
+  max-width: 290px;
+}
+
+/* Perforated Scalloped Teeth */
+.stamp-card::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  background: radial-gradient(circle, transparent 4px, #ffffff 4.5px);
+  background-size: 14px 14px;
+  z-index: -1;
+  border-radius: 2px;
+}
+
+.stamp-inner-border {
+  border: 2px solid #8e253e;
+  padding: 4px;
+  background: #ffffff;
+  border-radius: 1px;
+}
+
+.stamp-inner-border img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  display: block;
+  border-radius: 1px;
+}
+
+/* Style 2: POLAROID PHOTO FRAME */
+.polaroid-card {
+  background: #ffffff;
+  padding: 8px 8px 22px 8px;
+  box-shadow: 0 12px 28px rgba(120, 20, 40, 0.20);
+  border-radius: 3px;
+  cursor: pointer;
+  width: 90%;
+  max-width: 290px;
+  position: relative;
+}
+
+.polaroid-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  border-radius: 2px;
+}
+
+/* Romantic Handwritten Captions Around Photos (Matches Reference) */
+.memory-caption {
+  font-family: var(--font-cursive);
+  font-size: 21px;
+  color: #ffffff;
+  text-shadow:
+    0 1px 3px rgba(120, 20, 40, 0.7),
+    0 2px 8px rgba(140, 30, 60, 0.5);
+  text-align: center;
+  line-height: 1.35;
+  margin-top: 12px;
+  padding: 0 10px;
+  font-weight: 700;
+}
+
+/* Photo Upload Helper Bar */
+.scrapbook-upload-bar {
+  margin: 30px 0 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-upload-photo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  border: 1.5px dashed var(--accent-rose);
+  color: var(--accent-burgundy);
+  padding: 8px 22px;
+  border-radius: 24px;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(160, 40, 70, 0.1);
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.btn-upload-photo:active {
+  transform: scale(0.96);
+  background: #fff0f3;
+}
+
+/* Footer & Return Button */
+.letter-footer {
+  margin-top: 28px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .btn-return-circle {
   width: 48px;
   height: 48px;
@@ -967,3 +1224,4 @@ body::after {
 .btn-fullscreen-toggle:active {
   transform: scale(0.92);
 }
+

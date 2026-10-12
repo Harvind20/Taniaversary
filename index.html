@@ -248,8 +248,16 @@
            SCREEN 4: FULL LOVE LETTER VIEW WITH TYPING ANIMATION
            ======================================================== -->
       <div class="screen" id="screen-letter">
-        <div class="letter-scroll-wrapper">
-          <article class="parchment-letter" id="parchmentLetter">
+        <div class="letter-scroll-wrapper" id="letterScrollWrapper">
+          
+          <!-- View Switcher Tabs (Letter vs Scrapbook) -->
+          <div class="card-nav-tabs">
+            <button type="button" class="tab-btn active" id="tabLetterBtn">💌 Love Letter</button>
+            <button type="button" class="tab-btn" id="tabScrapbookBtn">📸 Scrapbook</button>
+          </div>
+
+          <!-- Section A: Parchment Love Letter -->
+          <article class="parchment-letter active-view" id="parchmentLetter">
             <!-- Decorative Ribbon / Heart Accent -->
             <div class="letter-top-accent">
               <span class="heart-badge">❤️</span>
@@ -268,13 +276,39 @@
               <button type="button" class="skip-typing-btn" id="btnSkipTyping">✨ Read full letter</button>
             </div>
 
-            <!-- Return Back Button (Matches Reference Screenshot 5) -->
-            <div class="letter-footer">
-              <button type="button" class="btn-return-circle" id="btnReturnEnvelope" title="Back to Envelope" aria-label="Back">
-                <span class="arrow-icon">←</span>
-              </button>
+            <!-- Quick Jump to Photos Button at bottom of letter -->
+            <div class="letter-jump-section">
+              <button type="button" class="btn-jump-photos" id="btnJumpPhotos">📸 View Our Scrapbook Photos ⬇️</button>
             </div>
           </article>
+
+          <!-- Section B: Scrapbook Memory Board (Matches Reference Image) -->
+          <section class="scrapbook-section" id="scrapbookSection">
+            <div class="scrapbook-header">
+              <h2 class="scrapbook-title cursive-font" id="memoriesTitle">Our Favorite Moments 💕</h2>
+              <p class="scrapbook-subtitle cursive-font" id="memoriesSubtitle">Every picture tells our story</p>
+            </div>
+
+            <!-- Memory Board Grid / Feed -->
+            <div class="scrapbook-grid" id="scrapbookGrid">
+              <!-- Rendered dynamically by script.js from config.js -->
+            </div>
+
+            <!-- Interactive photo upload / picker for easy customization -->
+            <div class="scrapbook-upload-bar">
+              <label class="btn-upload-photo" for="photoFileInput" title="Select photos from your device">
+                📷 Upload / Replace Photos
+              </label>
+              <input type="file" id="photoFileInput" accept="image/*" multiple style="display:none">
+            </div>
+          </section>
+
+          <!-- Return Back Button (Matches Reference Screenshot 5) -->
+          <div class="letter-footer">
+            <button type="button" class="btn-return-circle" id="btnReturnEnvelope" title="Back to Envelope" aria-label="Back">
+              <span class="arrow-icon">←</span>
+            </button>
+          </div>
         </div>
       </div>
 

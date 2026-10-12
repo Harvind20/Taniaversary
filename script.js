@@ -42,6 +42,15 @@ function applyConfig() {
     if (CONFIG.song.title) document.getElementById("songTitle").textContent = CONFIG.song.title;
     if (CONFIG.song.artist) document.getElementById("songArtist").textContent = CONFIG.song.artist;
   }
+
+  if (CONFIG.memoriesTitle) {
+    const el = document.getElementById("memoriesTitle");
+    if (el) el.textContent = CONFIG.memoriesTitle;
+  }
+  if (CONFIG.memoriesSubtitle) {
+    const el = document.getElementById("memoriesSubtitle");
+    if (el) el.textContent = CONFIG.memoriesSubtitle;
+  }
 }
 
 // --------------------------------------------------------
@@ -461,6 +470,56 @@ let typewriterTimeouts = [];
 function initLetterEngine() {
   const btnReturn = document.getElementById("btnReturnEnvelope");
   const btnSkip = document.getElementById("btnSkipTyping");
+  const tabLetterBtn = document.getElementById("tabLetterBtn");
+  const tabScrapbookBtn = document.getElementById("tabScrapbookBtn");
+  const parchmentLetter = document.getElementById("parchmentLetter");
+  const scrapbookSection = document.getElementById("scrapbookSection");
+  const btnJumpPhotos = document.getElementById("btnJumpPhotos");
+  const photoFileInput = document.getElementById("photoFileInput");
+
+  // Tab Switching
+  if (tabLetterBtn && tabScrapbookBtn) {
+    tabLetterBtn.addEventListener("click", () => {
+      tabLetterBtn.classList.add("active");
+      tabScrapbookBtn.classList.remove("active");
+      parchmentLetter.classList.remove("hidden-view");
+      scrapbookSection.classList.add("hidden-view");
+    });
+
+    tabScrapbookBtn.addEventListener("click", () => {
+      tabScrapbookBtn.classList.add("active");
+      tabLetterBtn.classList.remove("active");
+      scrapbookSection.classList.remove("hidden-view");
+      parchmentLetter.classList.add("hidden-view");
+    });
+  }
+
+  // Jump from letter directly to photos
+  if (btnJumpPhotos) {
+    btnJumpPhotos.addEventListener("click", () => {
+      if (tabScrapbookBtn) tabScrapbookBtn.click();
+      const wrapper = document.getElementById("letterScrollWrapper");
+      if (wrapper) wrapper.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  // Populate Scrapbook Gallery (Matches Reference Collage)
+  renderScrapbookGallery();
+
+  // Photo Upload Handler (Allows replacing photos live on device)
+  if (photoFileInput) {
+    photoFileInput.addEventListener("change", (e) => {
+      const files = Array.from(e.target.files);
+      if (files.length === 0) return;
+      const imgs = document.querySelectorAll(".scrapbook-item img");
+      files.forEach((file, idx) => {
+        if (imgs[idx]) {
+          imgs[idx].src = URL.createObjectURL(file);
+        }
+      });
+      playSuccessChime();
+    });
+  }
 
   // Return to Envelope view
   btnReturn.addEventListener("click", () => {
@@ -471,6 +530,79 @@ function initLetterEngine() {
   btnSkip.addEventListener("click", () => {
     skipTypewriter();
   });
+}
+
+// Render Scrapbook Collage matching reference image
+function renderScrapbookGallery() {
+  const grid = document.getElementById("scrapbookGrid");
+  if (!grid) return;
+  grid.innerHTML = "";
+
+  const memories = (CONFIG && CONFIG.memories) ? CONFIG.memories : [];
+
+  memories.forEach((item, index) => {
+    const itemEl = document.createElement("div");
+    itemEl.className = "scrapbook-item";
+    if (item.rotation) {
+      itemEl.style.transform = `rotate(${item.rotation}deg)`;
+    }
+
+    // Four-leaf clover sticker (Matches reference image)
+    const clover = document.createElement("div");
+    clover.className = "clover-sticker";
+    clover.textContent = item.sticker || "🍀";
+    itemEl.appendChild(clover);
+
+    // Frame Card
+    if (item.style === "stamp") {
+      // Scalloped Postage Stamp
+      const stampCard = document.createElement("div");
+      stampCard.className = "stamp-card";
+      const stampInner = document.createElement("div");
+      stampInner.className = "stamp-inner-border";
+      const img = document.createElement("img");
+      img.src = item.image;
+      img.alt = "Anniversary Memory";
+      img.onerror = () => { img.src = getPlaceholderImage(index); };
+      stampInner.appendChild(img);
+      stampCard.appendChild(stampInner);
+      itemEl.appendChild(stampCard);
+    } else {
+      // Polaroid Card
+      const polaroidCard = document.createElement("div");
+      polaroidCard.className = "polaroid-card";
+      const img = document.createElement("img");
+      img.src = item.image;
+      img.alt = "Anniversary Memory";
+      img.onerror = () => { img.src = getPlaceholderImage(index); };
+      polaroidCard.appendChild(img);
+      itemEl.appendChild(polaroidCard);
+    }
+
+    // Handwritten Romantic Cursive Caption
+    if (item.caption) {
+      const caption = document.createElement("p");
+      caption.className = "memory-caption";
+      caption.textContent = item.caption;
+      itemEl.appendChild(caption);
+    }
+
+    grid.appendChild(itemEl);
+  });
+}
+
+// Fallback pastel illustration if custom photo not yet placed in assets/images/
+function getPlaceholderImage(index) {
+  const themes = [
+    { bg: "#ffe5ec", icon: "💑", text: "Us Together" },
+    { bg: "#fff0f3", icon: "✨", text: "Special Memory" },
+    { bg: "#fce2ea", icon: "🎬", text: "Movie Date" },
+    { bg: "#ffccd5", icon: "💖", text: "Sweet Moments" },
+    { bg: "#ffe5ec", icon: "🥰", text: "Favorite Smile" },
+    { bg: "#fff0f5", icon: "🌸", text: "Forever Love" }
+  ];
+  const t = themes[index % themes.length];
+  return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect width="100%" height="100%" fill="${encodeURIComponent(t.bg)}"/><text x="50%" y="45%" font-size="52" text-anchor="middle" dominant-baseline="central">${t.icon}</text><text x="50%" y="72%" font-size="19" font-family="sans-serif" font-weight="bold" fill="%239e2542" text-anchor="middle">${encodeURIComponent(t.text)}</text></svg>`;
 }
 
 function startTypewriterAnimation() {
