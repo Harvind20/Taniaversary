@@ -5,10 +5,10 @@
 
 const CONFIG = {
   // The 4-digit PIN required to unlock
-  pin: "0728",
+  pin: "1820",
 
   // Hint displayed under the passcode slots
-  hint: 'Hint: The day you finally said "YES" to me. 💕',
+  hint: 'Hint: BabySayang hbd 💕',
 
   // Access Granted popup settings
   grantedTitle: "Access Granted!",

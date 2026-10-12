@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#fce2ea">
   <title>Happy 1 Year Anniversary 💕</title>
   
   <!-- Romantic Google Fonts -->
@@ -16,28 +19,14 @@
   <!-- Ambient Floating Heart Petals Canvas -->
   <canvas id="petals-canvas"></canvas>
 
-  <!-- Main Retro Window Frame -->
-  <main class="window-container" id="windowContainer">
-    <!-- Window Title Bar with Mac-style Dots -->
-    <header class="window-bar">
-      <div class="mac-dots">
-        <span class="dot red" title="Close"></span>
-        <span class="dot yellow" title="Minimize"></span>
-        <span class="dot green" title="Maximize"></span>
-      </div>
-      <div class="window-address-pill">
-        <span class="lock-icon">🔒</span>
-        <span class="address-text">taniaversary.love/special-delivery</span>
-      </div>
-      <div class="window-actions">
-        <button class="sound-toggle-btn" id="soundToggleBtn" title="Toggle Sound / Music" aria-label="Toggle Sound">
-          <span id="soundIcon">🔇</span>
-        </button>
-      </div>
-    </header>
+  <!-- Floating Audio Mute Toggle Button -->
+  <button class="sound-floating-btn" id="soundToggleBtn" title="Toggle Sound / Music" aria-label="Toggle Sound">
+    <span id="soundIcon">🔇</span>
+  </button>
 
-    <!-- Content Viewport -->
-    <section class="window-content" id="windowContent">
+  <!-- Mobile Fullscreen Edge-to-Edge App Container -->
+  <main class="app-container" id="appContainer">
+    <div class="screens-wrapper" id="screensWrapper">
 
       <!-- ========================================================
            SCREEN 1: 4-DIGIT PIN PASSCODE LOCK SCREEN
@@ -289,7 +278,7 @@
         </div>
       </div>
 
-    </section>
+    </div>
 
     <!-- Bottom Fullscreen Toggle Button (Matches Reference Screenshots) -->
     <button type="button" class="btn-fullscreen-toggle" id="btnFullscreen" title="Toggle Fullscreen" aria-label="Toggle Fullscreen">

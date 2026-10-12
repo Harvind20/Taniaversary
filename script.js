@@ -258,7 +258,7 @@ function playSuccessChime() {
 // 3. SCREEN 1: PASSCODE LOCK ENGINE
 // --------------------------------------------------------
 let enteredCode = "";
-const targetCode = (CONFIG && CONFIG.pin) ? String(CONFIG.pin) : "0728";
+const targetCode = (CONFIG && CONFIG.pin) ? String(CONFIG.pin) : "1820";
 
 function initPasscodeEngine() {
   const keypad = document.getElementById("keypad");
