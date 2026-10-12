@@ -104,22 +104,23 @@ body::after {
 }
 
 /* ========================================================
-   MOBILE APP CONTAINER (IPHONE 15 TAILORED)
+   RESPONSIVE DUAL-DEVICE ADAPTIVE CONTAINER (IPHONE 15 & MACBOOK)
    ======================================================== */
 .app-container {
   width: 100%;
   height: 100%;
   min-height: 100dvh;
-  max-width: 440px; /* On desktop, looks like iPhone 15 frame; on mobile fills 100% */
+  max-width: 100%;
   margin: 0 auto;
   position: relative;
   z-index: 10;
   display: flex;
   flex-direction: column;
-  padding-top: max(12px, env(safe-area-inset-top));
+  padding-top: max(10px, env(safe-area-inset-top));
   padding-bottom: max(12px, env(safe-area-inset-bottom));
   padding-left: max(12px, env(safe-area-inset-left));
   padding-right: max(12px, env(safe-area-inset-right));
+  transition: max-width 0.3s ease;
 }
 
 .screens-wrapper {
@@ -1231,4 +1232,225 @@ body::after {
 .btn-fullscreen-toggle:active {
   transform: scale(0.92);
 }
+
+/* ========================================================
+   MACBOOK NEO & WIDESCREEN ADAPTIVE SCALING (>= 768px)
+   ======================================================== */
+@media (min-width: 768px) {
+  .app-container {
+    max-width: 1060px;
+    padding: 24px 20px;
+  }
+
+  /* Screen 1 (PIN Lock): Perfectly proportioned on MacBook */
+  .pin-card-wrapper {
+    max-width: 380px;
+    margin: auto;
+  }
+
+  .vintage-title {
+    font-size: 38px;
+    margin-bottom: 20px;
+  }
+
+  .passcode-display {
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .passcode-slot {
+    width: 58px;
+    height: 58px;
+    border-radius: 14px;
+  }
+
+  .passcode-slot .slot-heart {
+    font-size: 30px;
+  }
+
+  .passcode-slot .slot-digit {
+    font-size: 32px;
+  }
+
+  .passcode-hint {
+    font-size: 21px;
+    margin-bottom: 26px;
+  }
+
+  .keypad-grid {
+    width: 280px;
+    padding: 18px 16px;
+    gap: 14px;
+    border-radius: 26px;
+  }
+
+  .key-btn {
+    width: 74px;
+    height: 60px;
+    font-size: 26px;
+    border-radius: 16px;
+  }
+
+  .key-btn:hover {
+    background: #af324f;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 0 #571223;
+  }
+
+  .key-btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #571223;
+  }
+
+  /* Screen 2 (Modal): Centered on MacBook */
+  .modal-card {
+    max-width: 350px;
+    padding: 32px 28px 26px;
+  }
+
+  .modal-title {
+    font-size: 28px;
+  }
+
+  .mascot-container {
+    width: 130px;
+    height: 130px;
+  }
+
+  .modal-proceed-btn:hover {
+    background: #bb3053;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(160, 40, 70, 0.45);
+  }
+
+  /* Screen 3 (Envelope): Elegant 3D envelope on MacBook */
+  .envelope-container {
+    width: 350px;
+    height: 240px;
+    margin: 36px auto 20px;
+  }
+
+  .postcard-slider {
+    width: 308px;
+    height: 220px;
+    left: 21px;
+  }
+
+  .envelope-wrapper.opened .postcard-slider {
+    transform: translateY(-135px);
+  }
+
+  .envelope-flap {
+    height: 122px;
+  }
+
+  .wax-seal-btn {
+    top: 114px;
+  }
+
+  .wax-seal-btn:hover {
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+
+  /* Screen 4 (Letter): Centered reading parchment */
+  .card-nav-tabs {
+    max-width: 320px;
+    padding: 5px;
+    margin-bottom: 20px;
+  }
+
+  .tab-btn {
+    font-size: 14px;
+    padding: 9px 18px;
+  }
+
+  .parchment-letter {
+    max-width: 720px;
+    padding: 40px 48px 32px;
+  }
+
+  .letter-header {
+    font-size: 32px;
+    margin-bottom: 24px;
+  }
+
+  .letter-content {
+    font-size: 24px;
+    line-height: 1.85;
+  }
+
+  .letter-content p {
+    margin-bottom: 22px;
+  }
+
+  /* Screen 4 (Scrapbook): 3-COLUMN AESTHETIC COLLAGE (Matches Reference Image 6!) */
+  .scrapbook-section {
+    max-width: 1020px;
+  }
+
+  .scrapbook-header {
+    margin-bottom: 30px;
+  }
+
+  .scrapbook-title {
+    font-size: 36px;
+  }
+
+  .scrapbook-subtitle {
+    font-size: 22px;
+  }
+
+  .scrapbook-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px 24px;
+    align-items: start;
+    width: 100%;
+  }
+
+  .scrapbook-item {
+    max-width: 100%;
+  }
+
+  .stamp-card, .polaroid-card {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .stamp-inner-border img, .polaroid-card img {
+    height: 210px;
+  }
+
+  .stamp-card:hover, .polaroid-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 16px 36px rgba(120, 20, 40, 0.25);
+  }
+
+  .memory-caption {
+    font-size: 22px;
+    margin-top: 14px;
+  }
+
+  /* Floating Music Player Bar */
+  .music-player-bar {
+    max-width: 380px;
+    bottom: 20px;
+  }
+
+  .music-pill {
+    padding: 8px 18px;
+  }
+
+  .music-btn:hover {
+    background: #be2e50;
+    transform: scale(1.08);
+  }
+
+  .btn-return-circle:hover {
+    background: var(--accent-burgundy);
+    color: #ffffff;
+    transform: scale(1.08);
+  }
+}
+
 
