@@ -1,0 +1,1115 @@
+/* ========================================================
+   💕 TANIAVERSARY - ROMANTIC PINK POSTCARD STYLES
+   ======================================================== */
+
+:root {
+  /* Pink Theme Palette */
+  --bg-pink-light: #fce2ea;
+  --bg-pink-grid: rgba(235, 120, 155, 0.38);
+  --accent-burgundy: #a02846;
+  --accent-rose: #d6336c;
+  --accent-blush: #ff85a1;
+  --accent-cream: #fff9fa;
+  --card-bg: #fffbfb;
+  --seal-color: #8c1d37;
+  --seal-shadow: rgba(140, 29, 55, 0.35);
+  --text-dark: #3e1b24;
+  --text-muted: #733c4a;
+  
+  /* Fonts */
+  --font-serif: 'Playfair Display', 'DM Serif Display', Georgia, serif;
+  --font-cursive: 'Caveat', 'Dancing Script', cursive;
+  --font-sans: 'Quicksand', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-typewriter: 'Special Elite', 'Courier Prime', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font-sans);
+  color: var(--text-dark);
+}
+
+/* ========================================================
+   PINK GINGHAM / PLAID BACKGROUND
+   ======================================================== */
+body {
+  background-color: var(--bg-pink-light);
+  background-image:
+    linear-gradient(90deg, var(--bg-pink-grid) 50%, transparent 50%),
+    linear-gradient(var(--bg-pink-grid) 50%, transparent 50%);
+  background-size: 50px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Soft Vignette Overlay */
+body::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at center, transparent 40%, rgba(214, 51, 108, 0.18) 100%);
+  z-index: 1;
+}
+
+/* Floating Heart Petals Canvas */
+#petals-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ========================================================
+   VINTAGE RETRO BROWSER WINDOW
+   ======================================================== */
+.window-container {
+  width: 95%;
+  max-width: 860px;
+  height: 94vh;
+  max-height: 820px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow:
+    0 25px 60px rgba(160, 40, 70, 0.22),
+    0 10px 25px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(220, 100, 130, 0.3);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+  animation: windowFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes windowFadeIn {
+  from { opacity: 0; transform: scale(0.96) translateY(12px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Mac Window Top Bar */
+.window-bar {
+  height: 42px;
+  background: #fdf2f4;
+  border-bottom: 1px solid #f3cfd7;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.mac-dots {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+
+.mac-dots .dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.15);
+}
+
+.mac-dots .dot.red { background-color: #ff5f56; border: 1px solid #e0443e; }
+.mac-dots .dot.yellow { background-color: #ffbd2e; border: 1px solid #dea123; }
+.mac-dots .dot.green { background-color: #27c93f; border: 1px solid #1aab29; }
+
+.window-address-pill {
+  background: #ffffff;
+  border: 1px solid #eed0d8;
+  border-radius: 20px;
+  padding: 4px 16px;
+  font-size: 11.5px;
+  color: #8c4558;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.03);
+}
+
+.window-actions {
+  display: flex;
+  align-items: center;
+}
+
+.sound-toggle-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+.sound-toggle-btn:hover {
+  transform: scale(1.15);
+}
+
+/* Window Content Viewport */
+.window-content {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg-pink-light);
+  background-image:
+    linear-gradient(90deg, var(--bg-pink-grid) 50%, transparent 50%),
+    linear-gradient(var(--bg-pink-grid) 50%, transparent 50%);
+  background-size: 48px 48px;
+}
+
+/* Screen Transitions */
+.screen {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform: translateY(14px);
+  overflow-y: auto;
+}
+
+.screen.active {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Vintage Header Title */
+.vintage-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4.5vw, 38px);
+  font-weight: 800;
+  color: var(--text-dark);
+  text-align: center;
+  letter-spacing: 0.5px;
+  margin-bottom: 14px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* ========================================================
+   SCREEN 1: PASSCODE LOCK SCREEN
+   ======================================================== */
+.pin-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 380px;
+  width: 100%;
+}
+
+.passcode-display {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.passcode-slot {
+  width: 48px;
+  height: 48px;
+  background: #ffffff;
+  border: 2px solid #8e253e;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 6px rgba(142, 37, 62, 0.15);
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s ease;
+}
+
+.passcode-slot .slot-heart {
+  font-size: 24px;
+  color: #f7a8b9;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.passcode-slot .slot-digit {
+  display: none;
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--accent-burgundy);
+}
+
+/* When a digit is entered */
+.passcode-slot.filled {
+  transform: scale(1.06);
+  border-color: var(--accent-burgundy);
+}
+
+.passcode-slot.filled .slot-heart {
+  color: var(--accent-rose);
+  transform: scale(1.15);
+}
+
+/* Reveal digits mode */
+.passcode-slot.revealed .slot-heart {
+  display: none;
+}
+.passcode-slot.revealed .slot-digit {
+  display: block;
+}
+
+/* Shake on wrong code */
+.passcode-display.shake {
+  animation: shakeSlots 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes shakeSlots {
+  10%, 90% { transform: translate3d(-3px, 0, 0); }
+  20%, 80% { transform: translate3d(5px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
+  40%, 60% { transform: translate3d(6px, 0, 0); }
+}
+
+.passcode-hint {
+  font-family: var(--font-serif);
+  font-size: 13.5px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 22px;
+  font-style: italic;
+  max-width: 290px;
+}
+
+/* Keypad Grid (Matches Reference Layout) */
+.keypad-grid {
+  background: rgba(255, 255, 255, 0.88);
+  border: 2px solid #8e253e;
+  border-radius: 20px;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 240px;
+  box-shadow: 0 10px 25px rgba(142, 37, 62, 0.14);
+}
+
+.key-btn {
+  width: 60px;
+  height: 56px;
+  background: #8e253e;
+  border: 2px solid #571223;
+  border-radius: 12px;
+  color: #ffffff;
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #571223;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background-color 0.15s ease;
+  user-select: none;
+}
+
+.key-btn:hover {
+  background: #a12d48;
+}
+
+.key-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #571223;
+}
+
+.key-btn.special-key {
+  font-size: 20px;
+}
+
+.key-btn.del-key {
+  font-size: 14px;
+  font-weight: 800;
+  font-family: var(--font-sans);
+  letter-spacing: 0.5px;
+}
+
+/* ========================================================
+   SCREEN 2: "ACCESS GRANTED!" MODAL
+   ======================================================== */
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(80, 20, 35, 0.45);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.modal-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-card {
+  background: #ffffff;
+  border: 2px solid #ecd0d7;
+  border-radius: 22px;
+  padding: 30px 28px 24px;
+  width: 90%;
+  max-width: 320px;
+  text-align: center;
+  box-shadow: 0 20px 45px rgba(120, 20, 40, 0.3);
+  transform: scale(0.85);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-overlay.active .modal-card {
+  transform: scale(1);
+}
+
+.modal-title {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 12px;
+}
+
+.mascot-container {
+  position: relative;
+  margin: 10px auto 16px;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mascot-glow {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 140, 170, 0.4) 0%, transparent 70%);
+  animation: pulseGlow 2.5s infinite ease-in-out;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(0.9); opacity: 0.5; }
+  50% { transform: scale(1.15); opacity: 0.9; }
+}
+
+.rose-doll-svg {
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 6px 12px rgba(160, 40, 70, 0.2));
+  animation: floatDoll 3s ease-in-out infinite;
+}
+
+@keyframes floatDoll {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.modal-msg {
+  font-size: 15px;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.modal-proceed-btn {
+  background: var(--accent-burgundy);
+  color: #ffffff;
+  border: 1px solid #6b1429;
+  border-radius: 30px;
+  padding: 10px 32px;
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(160, 40, 70, 0.35);
+  transition: all 0.2s ease;
+}
+
+.modal-proceed-btn:hover {
+  background: #bb3053;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(160, 40, 70, 0.45);
+}
+
+.modal-proceed-btn:active {
+  transform: translateY(1px);
+}
+
+/* ========================================================
+   SCREEN 3: INTERACTIVE ENVELOPE & OPENING
+   ======================================================== */
+.envelope-screen-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+}
+
+.envelope-container {
+  width: 320px;
+  height: 220px;
+  margin: 30px auto 16px;
+  position: relative;
+  perspective: 1000px;
+}
+
+.envelope-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+/* Envelope Back */
+.envelope-back-panel {
+  position: absolute;
+  inset: 0;
+  background: #7a1e35;
+  border-radius: 10px;
+  box-shadow: 0 15px 35px rgba(120, 25, 45, 0.28);
+  z-index: 1;
+}
+
+/* Postcard Sliding Card Inside */
+.postcard-slider {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  width: 280px;
+  height: 200px;
+  z-index: 2;
+  transition: transform 0.9s cubic-bezier(0.34, 1.25, 0.64, 1), z-index 0.9s ease;
+  cursor: pointer;
+}
+
+/* Postcard Style (Postage stamp scalloped look) */
+.postcard-card {
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #ffd0dc;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 14px 12px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Scalloped postage edges */
+.postcard-card::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 1.5px dashed #f1a9b9;
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+.postcard-heading {
+  font-family: var(--font-cursive);
+  font-size: 23px;
+  font-weight: 700;
+  color: var(--accent-burgundy);
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
+.bouquet-graphic {
+  margin: 2px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.postcard-tap-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.click-hand {
+  font-size: 13px;
+  animation: bounceHand 1.5s infinite ease-in-out;
+}
+
+@keyframes bounceHand {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* Envelope Front Folded Triangles (Pocket) */
+.envelope-pocket {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background:
+    linear-gradient(to top right, #91243e 50%, transparent 50%) left bottom / 50% 100% no-repeat,
+    linear-gradient(to top left, #852037 50%, transparent 50%) right bottom / 50% 100% no-repeat,
+    linear-gradient(to bottom, transparent 35%, #7a1d33 100%);
+  border-radius: 0 0 10px 10px;
+}
+
+/* Envelope Top Flap */
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 112px;
+  background: #a32b49;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.75s ease;
+  z-index: 6;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Wax Seal Button */
+.wax-seal-btn {
+  position: absolute;
+  top: 104px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 8;
+  outline: none;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+}
+
+.wax-seal-btn:hover {
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.wax-seal-outer {
+  width: 58px;
+  height: 58px;
+  background: radial-gradient(circle at 35% 35%, #a82947, var(--seal-color) 70%, #571021 100%);
+  border-radius: 50%;
+  box-shadow:
+    0 6px 14px var(--seal-shadow),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #6b1428;
+}
+
+.wax-seal-inner {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 220, 230, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.wax-seal-emblem {
+  font-size: 20px;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3));
+}
+
+/* State: ENVELOPE OPENED */
+.envelope-wrapper.opened .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope-wrapper.opened .wax-seal-btn {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.5);
+}
+
+.envelope-wrapper.opened .postcard-slider {
+  transform: translateY(-130px);
+  z-index: 7;
+}
+
+.envelope-wrapper.opened .postcard-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 14px 30px rgba(160, 40, 70, 0.28);
+}
+
+.seal-prompt {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 10px;
+  font-style: italic;
+  animation: pulsePrompt 2s infinite ease-in-out;
+  transition: opacity 0.4s ease;
+}
+
+@keyframes pulsePrompt {
+  0%, 100% { opacity: 0.7; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-3px); }
+}
+
+.seal-prompt.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ========================================================
+   MUSIC PLAYER BAR (AT BOTTOM OF ENVELOPE / CARD SCREEN)
+   ======================================================== */
+.music-player-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 18px;
+  width: 100%;
+  max-width: 360px;
+  transition: all 0.6s cubic-bezier(0.34, 1.25, 0.64, 1);
+}
+
+.music-player-bar.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
+
+.music-bar-label {
+  font-family: var(--font-cursive);
+  font-size: 18px;
+  color: var(--accent-burgundy);
+  font-weight: 700;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.music-pill {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1.5px solid #eecdd5;
+  border-radius: 40px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 6px 18px rgba(160, 40, 70, 0.12);
+}
+
+.album-art-wrap {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+}
+
+.vinyl-record {
+  width: 100%;
+  height: 100%;
+  background: #201518;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.vinyl-record.spinning {
+  animation: spinVinyl 3.5s linear infinite;
+}
+
+@keyframes spinVinyl {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.vinyl-grooves {
+  position: absolute;
+  inset: 4px;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+}
+
+.vinyl-center {
+  width: 16px;
+  height: 16px;
+  background: #e83e66;
+  border-radius: 50%;
+  font-size: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 2;
+}
+
+.song-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.song-title-text {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.song-artist-text {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Sound wave equalizer bars */
+.equalizer-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 16px;
+  padding: 0 4px;
+}
+
+.equalizer-bars .bar {
+  width: 3px;
+  height: 4px;
+  background: var(--accent-rose);
+  border-radius: 2px;
+  transition: height 0.2s ease;
+}
+
+.equalizer-bars.playing .bar:nth-child(1) { animation: eqJump 0.8s infinite 0.1s ease-in-out; }
+.equalizer-bars.playing .bar:nth-child(2) { animation: eqJump 0.6s infinite 0.3s ease-in-out; }
+.equalizer-bars.playing .bar:nth-child(3) { animation: eqJump 0.9s infinite 0.2s ease-in-out; }
+.equalizer-bars.playing .bar:nth-child(4) { animation: eqJump 0.7s infinite 0.4s ease-in-out; }
+
+@keyframes eqJump {
+  0%, 100% { height: 4px; }
+  50% { height: 16px; }
+}
+
+.music-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--accent-burgundy);
+  border: none;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  font-size: 13px;
+  transition: transform 0.15s ease, background-color 0.2s ease;
+}
+
+.music-btn:hover {
+  background: #be2e50;
+  transform: scale(1.08);
+}
+
+.music-btn:active {
+  transform: scale(0.95);
+}
+
+/* ========================================================
+   SCREEN 4: FULL LOVE LETTER VIEW WITH TYPEWRITER EFFECT
+   ======================================================== */
+.letter-scroll-wrapper {
+  width: 100%;
+  max-width: 680px;
+  max-height: 100%;
+  padding: 10px 8px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.parchment-letter {
+  background: var(--card-bg);
+  border: 1.5px solid #f1ccd5;
+  border-radius: 16px;
+  box-shadow:
+    0 18px 45px rgba(160, 40, 70, 0.14),
+    0 4px 10px rgba(0, 0, 0, 0.04);
+  padding: clamp(24px, 4vw, 42px) clamp(20px, 4.5vw, 40px);
+  width: 100%;
+  position: relative;
+  line-height: 1.85;
+}
+
+.letter-top-accent {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.heart-badge {
+  font-size: 26px;
+  display: inline-block;
+  animation: pulseHeart 1.8s infinite ease-in-out;
+}
+
+@keyframes pulseHeart {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.cursive-font {
+  font-family: var(--font-cursive);
+}
+
+.letter-header {
+  font-size: clamp(26px, 3.8vw, 34px);
+  color: var(--accent-burgundy);
+  text-align: center;
+  margin-bottom: 24px;
+  font-weight: 700;
+}
+
+.letter-content {
+  font-size: clamp(20px, 2.8vw, 24px);
+  color: var(--text-dark);
+  font-weight: 600;
+  min-height: 180px;
+}
+
+.letter-content p {
+  margin-bottom: 20px;
+  text-indent: 1.5em;
+  line-height: 1.7;
+}
+
+.letter-content .letter-closing {
+  margin-top: 28px;
+  text-align: center;
+  font-size: clamp(22px, 3.2vw, 26px);
+  color: var(--accent-burgundy);
+  text-indent: 0;
+}
+
+/* Typewriter Blinking Cursor */
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background-color: var(--accent-rose);
+  vertical-align: text-bottom;
+  margin-left: 2px;
+  animation: blinkCursor 0.8s infinite;
+}
+
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Typing Skip Controls */
+.typing-controls {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+
+.skip-typing-btn {
+  background: transparent;
+  border: 1px dashed #dca5b2;
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 13px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.skip-typing-btn:hover {
+  background: #fde8ed;
+  color: var(--accent-burgundy);
+}
+
+.letter-footer {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Circular Return Button (Matches Reference Screenshot 5) */
+.btn-return-circle {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid var(--accent-burgundy);
+  color: var(--accent-burgundy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(160, 40, 70, 0.16);
+  transition: all 0.2s ease;
+}
+
+.btn-return-circle:hover {
+  background: var(--accent-burgundy);
+  color: #ffffff;
+  transform: scale(1.1);
+  box-shadow: 0 6px 14px rgba(160, 40, 70, 0.28);
+}
+
+.btn-return-circle:active {
+  transform: scale(0.95);
+}
+
+/* ========================================================
+   FULLSCREEN TOGGLE BUTTON (MATCHES ALL SCREENSHOTS)
+   ======================================================== */
+.btn-fullscreen-toggle {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #e6b8c4;
+  color: var(--accent-burgundy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 50;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+}
+
+.btn-fullscreen-toggle:hover {
+  background: #ffffff;
+  transform: scale(1.08);
+  color: var(--accent-rose);
+}
+
+/* ========================================================
+   MOBILE & RESPONSIVE ADJUSTMENTS
+   ======================================================== */
+@media (max-width: 600px) {
+  .window-container {
+    width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .window-bar {
+    height: 38px;
+    padding: 0 10px;
+  }
+
+  .window-address-pill {
+    padding: 3px 10px;
+    font-size: 10px;
+  }
+
+  .vintage-title {
+    font-size: 26px;
+    margin-bottom: 10px;
+  }
+
+  .passcode-slot {
+    width: 44px;
+    height: 44px;
+  }
+
+  .passcode-slot .slot-heart {
+    font-size: 20px;
+  }
+
+  .keypad-grid {
+    width: 220px;
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .key-btn {
+    width: 54px;
+    height: 50px;
+    font-size: 21px;
+  }
+
+  .envelope-container {
+    width: 280px;
+    height: 190px;
+    margin: 20px auto 12px;
+  }
+
+  .postcard-slider {
+    width: 245px;
+    height: 175px;
+    left: 17px;
+  }
+
+  .postcard-heading {
+    font-size: 19px;
+  }
+
+  .bouquet-graphic svg {
+    width: 105px;
+    height: 85px;
+  }
+
+  .envelope-wrapper.opened .postcard-slider {
+    transform: translateY(-110px);
+  }
+
+  .parchment-letter {
+    padding: 20px 16px;
+  }
+
+  .letter-content {
+    font-size: 19px;
+  }
+}
