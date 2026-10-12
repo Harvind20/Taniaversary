@@ -835,6 +835,7 @@ body::after {
    ======================================================== */
 #screen-letter {
   overflow-y: auto !important;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
   padding: 0;
@@ -854,6 +855,8 @@ body::after {
   flex-direction: column;
   align-items: center;
   position: relative;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 /* Navigation Switcher Tabs (Letter vs Scrapbook) */
@@ -1075,21 +1078,26 @@ body::after {
 
 .scrapbook-grid {
   width: 100%;
+  max-width: 340px;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 32px;
   align-items: center;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 /* Individual Scrapbook Item (Photo + Caption + Sticker) */
 .scrapbook-item {
   width: 100%;
-  max-width: 320px;
+  max-width: 310px;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
   transition: transform 0.3s ease;
+  box-sizing: border-box;
+  margin: 0 auto;
 }
 
 /* Four-Leaf Clover Sticker (Matches Reference Photo) */
@@ -1115,17 +1123,19 @@ body::after {
   100% { transform: translateY(-4px) rotate(6deg); }
 }
 
-/* Style 1: SCALLOPED POSTAGE STAMP FRAME */
+/* Style 1: SCALLOPED POSTAGE STAMP FRAME (Preserves actual size & aspect ratio) */
 .stamp-card {
   position: relative;
   background: #ffffff;
   padding: 8px;
   border-radius: 2px;
-  box-shadow: 0 10px 24px rgba(120, 20, 40, 0.20);
+  box-shadow: 0 10px 24px rgba(120, 20, 40, 0.18);
   cursor: pointer;
   filter: drop-shadow(0 4px 10px rgba(160, 40, 70, 0.16));
-  width: 90%;
-  max-width: 290px;
+  width: 100%;
+  max-width: 310px;
+  box-sizing: border-box;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 /* Perforated Scalloped Teeth */
@@ -1148,28 +1158,32 @@ body::after {
 
 .stamp-inner-border img {
   width: 100%;
-  height: 190px;
-  object-fit: cover;
+  height: auto;
+  max-height: 440px;
+  object-fit: contain;
   display: block;
   border-radius: 1px;
 }
 
-/* Style 2: POLAROID PHOTO FRAME */
+/* Style 2: POLAROID PHOTO FRAME (Preserves actual size & aspect ratio) */
 .polaroid-card {
   background: #ffffff;
   padding: 8px 8px 22px 8px;
-  box-shadow: 0 12px 28px rgba(120, 20, 40, 0.20);
+  box-shadow: 0 12px 28px rgba(120, 20, 40, 0.18);
   border-radius: 3px;
   cursor: pointer;
-  width: 90%;
-  max-width: 290px;
+  width: 100%;
+  max-width: 310px;
+  box-sizing: border-box;
   position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .polaroid-card img {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
+  height: auto;
+  max-height: 440px;
+  object-fit: contain;
   display: block;
   border-radius: 2px;
 }
@@ -1178,15 +1192,14 @@ body::after {
 .memory-caption {
   font-family: var(--font-cursive);
   font-size: 21px;
-  color: #ffffff;
-  text-shadow:
-    0 1px 3px rgba(120, 20, 40, 0.7),
-    0 2px 8px rgba(140, 30, 60, 0.5);
+  color: var(--accent-burgundy);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
   text-align: center;
   line-height: 1.35;
-  margin-top: 12px;
-  padding: 0 10px;
+  margin-top: 10px;
+  padding: 0 8px;
   font-weight: 700;
+  max-width: 300px;
 }
 
 /* Photo Upload Helper Bar */
@@ -1444,15 +1457,25 @@ body::after {
   }
 
   .scrapbook-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px 24px;
-    align-items: start;
+    display: block;
+    columns: 3 260px;
+    column-gap: 28px;
     width: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+    box-sizing: border-box;
   }
 
   .scrapbook-item {
-    max-width: 100%;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 34px;
+    box-sizing: border-box;
   }
 
   .stamp-card, .polaroid-card {
@@ -1461,7 +1484,11 @@ body::after {
   }
 
   .stamp-inner-border img, .polaroid-card img {
-    height: 210px;
+    width: 100%;
+    height: auto;
+    max-height: 440px;
+    object-fit: contain;
+    display: block;
   }
 
   .stamp-card:hover, .polaroid-card:hover {
