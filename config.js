@@ -34,8 +34,8 @@ const CONFIG = {
 
   // Background Music configuration
   song: {
-    title: "Sa Bawat Sandali",
-    artist: "Amiel Sol",
+    title: "Baby Blue",
+    artist: "Daniel Caesar",
     // Put your MP3 file in assets/music/song.mp3 or specify a direct audio link
     src: "assets/music/song.mp3",
     // If no custom mp3 file is added yet, a romantic acoustic music box melody

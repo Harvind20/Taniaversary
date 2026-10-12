@@ -162,25 +162,28 @@ function ensureAudioContext() {
   }
 }
 
-// Built-in Romantic Acoustic Music Box (Plays if no MP3 or user explores)
+// Built-in Neo-Soul / Romantic Chords (Daniel Caesar - Baby Blue vibe)
 const ROMANTIC_MELODY = [
-  // Sweet romantic chord progression (C - G/B - Am - F)
+  // Fmaj7
+  { note: 349.23, duration: 0.7 }, // F4
+  { note: 440.00, duration: 0.6 }, // A4
+  { note: 523.25, duration: 0.6 }, // C5
+  { note: 659.25, duration: 0.8 }, // E5
+  // Am7
+  { note: 440.00, duration: 0.6 }, // A4
   { note: 523.25, duration: 0.6 }, // C5
   { note: 659.25, duration: 0.6 }, // E5
-  { note: 783.99, duration: 0.8 }, // G5
-  { note: 659.25, duration: 0.5 }, // E5
-  { note: 493.88, duration: 0.6 }, // B4
+  { note: 783.99, duration: 0.9 }, // G5
+  // Gm7
+  { note: 392.00, duration: 0.7 }, // G4
+  { note: 466.16, duration: 0.6 }, // Bb4
   { note: 587.33, duration: 0.6 }, // D5
-  { note: 783.99, duration: 0.8 }, // G5
-  { note: 587.33, duration: 0.5 }, // D5
-  { note: 440.00, duration: 0.6 }, // A4
+  { note: 698.46, duration: 0.9 }, // F5
+  // C7
   { note: 523.25, duration: 0.6 }, // C5
-  { note: 659.25, duration: 0.8 }, // E5
-  { note: 523.25, duration: 0.5 }, // C5
-  { note: 349.23, duration: 0.6 }, // F4
-  { note: 440.00, duration: 0.6 }, // A4
-  { note: 523.25, duration: 0.8 }, // C5
-  { note: 659.25, duration: 0.8 }, // E5
+  { note: 659.25, duration: 0.6 }, // E5
+  { note: 783.99, duration: 0.7 }, // G5
+  { note: 932.33, duration: 0.9 }  // Bb5
 ];
 
 let melodyStep = 0;
