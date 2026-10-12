@@ -409,15 +409,20 @@ function initEnvelopeEngine() {
     // Trigger burst of mini heart sparks
     spawnSealHeartSparks(waxSealBtn);
 
-    // Open envelope flap & slide out postcard
-    envelopeWrapper.classList.add("opened");
+    // Stage 1: Flap flips open backwards
+    envelopeWrapper.classList.add("flap-open", "opened");
     sealPromptText.classList.add("hidden");
 
-    // Reveal music player & start song automatically!
+    // Stage 2: Postcard rises UP ONLY AFTER the flap has completely opened
+    setTimeout(() => {
+      envelopeWrapper.classList.add("card-open");
+    }, 480);
+
+    // Stage 3: Reveal music player & start song automatically
     setTimeout(() => {
       musicPlayerBar.classList.remove("hidden");
       playMusic();
-    }, 600);
+    }, 850);
   }
 
   // Click postcard to open full letter view
@@ -426,6 +431,8 @@ function initEnvelopeEngine() {
       openEnvelope();
       return;
     }
+    // Ensure card has fully risen before opening letter
+    if (!envelopeWrapper.classList.contains("card-open")) return;
     switchScreen("screen-envelope", "screen-letter", () => {
       startTypewriterAnimation();
     });

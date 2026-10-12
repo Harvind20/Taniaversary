@@ -561,7 +561,7 @@ body::after {
   background: #a32b49;
   clip-path: polygon(0 0, 100% 0, 50% 100%);
   transform-origin: top center;
-  transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.75s ease;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 6;
   border-radius: 10px 10px 0 0;
 }
@@ -614,21 +614,25 @@ body::after {
   font-size: 20px;
 }
 
-/* State: ENVELOPE OPENED */
+/* State: ENVELOPE OPENED - Sequential 2-Stage Opening */
+.envelope-wrapper.flap-open .envelope-flap,
 .envelope-wrapper.opened .envelope-flap {
   transform: rotateX(180deg);
   z-index: 1;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.01s ease 0.22s;
 }
 
+.envelope-wrapper.flap-open .wax-seal-btn,
 .envelope-wrapper.opened .wax-seal-btn {
   opacity: 0;
   pointer-events: none;
   transform: translate(-50%, -50%) scale(0.5);
 }
 
-.envelope-wrapper.opened .postcard-slider {
+/* Postcard rises ONLY after flap has completely opened */
+.envelope-wrapper.card-open .postcard-slider {
   transform: translateY(-115px);
-  z-index: 7;
+  z-index: 5;
 }
 
 .seal-prompt {
@@ -1336,8 +1340,9 @@ body::after {
     left: 21px;
   }
 
-  .envelope-wrapper.opened .postcard-slider {
+  .envelope-wrapper.card-open .postcard-slider {
     transform: translateY(-135px);
+    z-index: 5;
   }
 
   .envelope-flap {
