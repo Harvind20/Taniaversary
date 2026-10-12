@@ -71,18 +71,22 @@ function initAudioSystem() {
   const soundToggleBtn = document.getElementById("soundToggleBtn");
   const soundIcon = document.getElementById("soundIcon");
 
+  // Sync song metadata with player UI
+  if (CONFIG.song) {
+    if (CONFIG.song.title) document.getElementById("songTitle").textContent = CONFIG.song.title;
+    if (CONFIG.song.artist) document.getElementById("songArtist").textContent = CONFIG.song.artist;
+  }
+
   // Audio candidate paths in order of preference
   const audioCandidates = [
     (CONFIG.song && CONFIG.song.src) ? CONFIG.song.src : null,
+    "music/Perfect.mp3",
     "music/song.mp3",
-    "music/babyblue.mp3",
-    "music/Baby Blue.mp3",
-    "music/baby_blue.mp3",
+    "pictures/Perfect.mp3",
     "pictures/song.mp3",
-    "pictures/babyblue.mp3",
-    "pictures/Baby Blue.mp3",
+    "assets/music/Perfect.mp3",
     "assets/music/song.mp3",
-    "assets/music/babyblue.mp3",
+    "Perfect.mp3",
     "song.mp3"
   ].filter(Boolean);
 
@@ -200,28 +204,28 @@ function ensureAudioContext() {
   }
 }
 
-// Built-in Neo-Soul / Romantic Chords (Daniel Caesar - Baby Blue vibe)
+// Built-in Acoustic / Romantic Music Box (Ed Sheeran - Perfect melody)
 const ROMANTIC_MELODY = [
-  // Fmaj7
-  { note: 349.23, duration: 0.7 }, // F4
+  // G major (I found a love...)
+  { note: 392.00, duration: 0.6 }, // G4
   { note: 440.00, duration: 0.6 }, // A4
-  { note: 523.25, duration: 0.6 }, // C5
-  { note: 659.25, duration: 0.8 }, // E5
-  // Am7
-  { note: 440.00, duration: 0.6 }, // A4
-  { note: 523.25, duration: 0.6 }, // C5
-  { note: 659.25, duration: 0.6 }, // E5
-  { note: 783.99, duration: 0.9 }, // G5
-  // Gm7
-  { note: 392.00, duration: 0.7 }, // G4
-  { note: 466.16, duration: 0.6 }, // Bb4
-  { note: 587.33, duration: 0.6 }, // D5
-  { note: 698.46, duration: 0.9 }, // F5
-  // C7
-  { note: 523.25, duration: 0.6 }, // C5
-  { note: 659.25, duration: 0.6 }, // E5
-  { note: 783.99, duration: 0.7 }, // G5
-  { note: 932.33, duration: 0.9 }  // Bb5
+  { note: 493.88, duration: 0.8 }, // B4
+  { note: 587.33, duration: 0.9 }, // D5
+  // Em
+  { note: 329.63, duration: 0.6 }, // E4
+  { note: 392.00, duration: 0.6 }, // G4
+  { note: 493.88, duration: 0.8 }, // B4
+  { note: 659.25, duration: 0.9 }, // E5
+  // C
+  { note: 261.63, duration: 0.6 }, // C4
+  { note: 329.63, duration: 0.6 }, // E4
+  { note: 392.00, duration: 0.8 }, // G4
+  { note: 523.25, duration: 0.9 }, // C5
+  // D
+  { note: 293.66, duration: 0.6 }, // D4
+  { note: 369.99, duration: 0.6 }, // F#4
+  { note: 440.00, duration: 0.8 }, // A4
+  { note: 587.33, duration: 0.9 }  // D5
 ];
 
 let melodyStep = 0;
