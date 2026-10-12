@@ -21,7 +21,7 @@ const CONFIG = {
 
   // Postcard front settings
   postcardTitle: "Happy 1 Year Anniversary,\nmy love",
-  postcardSubtitle: "Click to read my letter ❤️",
+  postcardSubtitle: "click Pusheen's strawbee to read",
 
   // Full letter view settings
   letterHeader: "HAPPY 1 YEAR ANNIVERSARY TO MY PRETTIEST BABYYYYYY 😚💗🎀🍓",

@@ -526,13 +526,26 @@ body::after {
   100% { transform: translateY(-3px); }
 }
 
+.postcard-inner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
 .postcard-tap-hint {
-  font-size: 11px;
-  color: var(--text-muted);
+  font-size: 11.5px;
+  color: var(--accent-burgundy);
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 4px;
+  justify-content: center;
+  text-align: center;
+  gap: 6px;
+  width: 100%;
+  margin-top: 6px;
 }
 
 .click-hand {
