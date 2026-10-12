@@ -99,21 +99,21 @@ function initAudioSystem() {
   soundToggleBtn.addEventListener("click", () => {
     isMuted = !isMuted;
     if (bgAudio) bgAudio.muted = isMuted;
-    soundIcon.textContent = isMuted ? "🔇" : "🔊";
+    updateSoundIcon(isMuted);
   });
 
   // Handle HTML5 audio events
   bgAudio.addEventListener("play", () => {
     isAudioPlaying = true;
-    playPauseIcon.textContent = "❚❚";
+    updatePlayPauseIcon(true);
     vinylDisc.classList.add("spinning");
     equalizerBars.classList.add("playing");
-    soundIcon.textContent = "🔊";
+    updateSoundIcon(isMuted);
   });
 
   bgAudio.addEventListener("pause", () => {
     isAudioPlaying = false;
-    playPauseIcon.textContent = "▶";
+    updatePlayPauseIcon(false);
     vinylDisc.classList.remove("spinning");
     equalizerBars.classList.remove("playing");
   });
@@ -126,6 +126,26 @@ function initAudioSystem() {
       console.log("Custom MP3 not found. Switching to built-in romantic music-box synth fallback!");
     }
   });
+}
+
+function updateSoundIcon(muted) {
+  const icon = document.getElementById("soundIcon");
+  if (!icon) return;
+  if (muted) {
+    icon.innerHTML = `<svg class="icon-svg icon-sound-off" viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M11 5L6 9H2v6h4l5 4V5z" fill="#9e2542"/><line x1="22" y1="9" x2="16" y2="15" stroke="#e0486b" stroke-width="2.2" stroke-linecap="round"/><line x1="16" y1="9" x2="22" y2="15" stroke="#e0486b" stroke-width="2.2" stroke-linecap="round"/></svg>`;
+  } else {
+    icon.innerHTML = `<svg class="icon-svg icon-sound-on" viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M11 5L6 9H2v6h4l5 4V5z" fill="#9e2542"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07" stroke="#e0486b" stroke-width="2.2" stroke-linecap="round"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14" stroke="#ff7b95" stroke-width="2.2" stroke-linecap="round"/></svg>`;
+  }
+}
+
+function updatePlayPauseIcon(isPlaying) {
+  const icon = document.getElementById("playPauseIcon");
+  if (!icon) return;
+  if (isPlaying) {
+    icon.innerHTML = `<svg viewBox="0 0 24 24" width="13" height="13" fill="#ffffff"><rect x="5" y="4" width="4.5" height="16" rx="2"/><rect x="14.5" y="4" width="4.5" height="16" rx="2"/></svg>`;
+  } else {
+    icon.innerHTML = `<svg viewBox="0 0 24 24" width="13" height="13" fill="#ffffff"><polygon points="6,4 20,12 6,20"/></svg>`;
+  }
 }
 
 // Toggle playback between MP3 or built-in Romantic Synthesizer
@@ -142,10 +162,10 @@ function toggleMusicPlayback() {
 function playMusic() {
   ensureAudioContext();
   isAudioPlaying = true;
-  document.getElementById("playPauseIcon").textContent = "❚❚";
+  updatePlayPauseIcon(true);
   document.getElementById("vinylDisc").classList.add("spinning");
   document.getElementById("equalizerBars").classList.add("playing");
-  document.getElementById("soundIcon").textContent = "🔊";
+  updateSoundIcon(isMuted);
 
   // Try playing custom MP3 first
   if (bgAudio && bgAudio.src && !bgAudio.error) {
@@ -160,7 +180,7 @@ function playMusic() {
 
 function pauseMusic() {
   isAudioPlaying = false;
-  document.getElementById("playPauseIcon").textContent = "▶";
+  updatePlayPauseIcon(false);
   document.getElementById("vinylDisc").classList.remove("spinning");
   document.getElementById("equalizerBars").classList.remove("playing");
 
@@ -464,7 +484,7 @@ function spawnSealHeartSparks(element) {
 
   for (let i = 0; i < 14; i++) {
     const spark = document.createElement("div");
-    spark.textContent = ["💖", "🌸", "✨", "💕", "❤️"][Math.floor(Math.random() * 5)];
+    spark.textContent = ["💖", "💕", "❤️", "💗", "💘"][Math.floor(Math.random() * 5)];
     spark.style.position = "fixed";
     spark.style.left = `${centerX}px`;
     spark.style.top = `${centerY}px`;
@@ -600,10 +620,28 @@ function renderScrapbookGallery() {
       itemEl.style.transform = `rotate(${item.rotation}deg)`;
     }
 
-    // Four-leaf clover sticker (Matches reference image)
+    // Four-leaf clover sticker (Professional colored vector SVG)
     const clover = document.createElement("div");
     clover.className = "clover-sticker";
-    clover.textContent = item.sticker || "🍀";
+    clover.innerHTML = `
+      <svg class="clover-svg" viewBox="0 0 32 32" width="28" height="28">
+        <defs>
+          <linearGradient id="cloverGrad_${index}" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#72cc77"/>
+            <stop offset="60%" stop-color="#419d47"/>
+            <stop offset="100%" stop-color="#28692c"/>
+          </linearGradient>
+        </defs>
+        <path d="M16 16 Q18 24 23 28" stroke="#37823c" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <g>
+          <path d="M16 16 C12 8 8 9 10 5 C12 1 16 8 16 16 C16 8 20 1 22 5 C24 9 20 8 16 16 Z" fill="url(#cloverGrad_${index})"/>
+          <path d="M16 16 C24 12 23 8 27 10 C31 12 24 16 16 16 C24 16 31 20 27 22 C23 24 24 20 16 16 Z" fill="url(#cloverGrad_${index})"/>
+          <path d="M16 16 C12 24 8 23 10 27 C12 31 16 24 16 16 C16 24 20 31 22 27 C24 23 20 24 16 16 Z" fill="url(#cloverGrad_${index})"/>
+          <path d="M16 16 C8 12 9 8 5 10 C1 12 8 16 16 16 C8 16 1 20 5 22 C9 24 8 20 16 16 Z" fill="url(#cloverGrad_${index})"/>
+          <circle cx="16" cy="16" r="1.8" fill="#a4e8a8" opacity="0.8"/>
+        </g>
+      </svg>
+    `;
     itemEl.appendChild(clover);
 
     // Frame Card
@@ -647,12 +685,12 @@ function renderScrapbookGallery() {
 // Fallback pastel illustration if custom photo not yet placed in assets/images/
 function getPlaceholderImage(index) {
   const themes = [
-    { bg: "#ffe5ec", icon: "💑", text: "Us Together" },
-    { bg: "#fff0f3", icon: "✨", text: "Special Memory" },
-    { bg: "#fce2ea", icon: "🎬", text: "Movie Date" },
-    { bg: "#ffccd5", icon: "💖", text: "Sweet Moments" },
-    { bg: "#ffe5ec", icon: "🥰", text: "Favorite Smile" },
-    { bg: "#fff0f5", icon: "🌸", text: "Forever Love" }
+    { bg: "#ffe5ec", icon: "❤️", text: "Us Together" },
+    { bg: "#fff0f3", icon: "💕", text: "Special Memory" },
+    { bg: "#fce2ea", icon: "💖", text: "Sweet Moments" },
+    { bg: "#ffccd5", icon: "💗", text: "Sweet Moments" },
+    { bg: "#ffe5ec", icon: "💓", text: "Favorite Smile" },
+    { bg: "#fff0f5", icon: "💘", text: "Forever Love" }
   ];
   const t = themes[index % themes.length];
   return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect width="100%" height="100%" fill="${encodeURIComponent(t.bg)}"/><text x="50%" y="45%" font-size="52" text-anchor="middle" dominant-baseline="central">${t.icon}</text><text x="50%" y="72%" font-size="19" font-family="sans-serif" font-weight="bold" fill="%239e2542" text-anchor="middle">${encodeURIComponent(t.text)}</text></svg>`;

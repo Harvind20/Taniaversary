@@ -536,8 +536,14 @@ body::after {
 }
 
 .click-hand {
-  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.click-hand-svg {
   animation: bounceHand 1.5s infinite ease-in-out;
+  filter: drop-shadow(0 2px 4px rgba(160, 40, 70, 0.25));
 }
 
 @keyframes bounceHand {
@@ -618,7 +624,14 @@ body::after {
 }
 
 .wax-seal-emblem {
-  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wax-seal-svg {
+  display: block;
+  filter: drop-shadow(0 1px 2px rgba(80, 10, 25, 0.45));
 }
 
 /* State: ENVELOPE OPENED - Sequential 2-Stage Opening */
@@ -864,7 +877,7 @@ body::after {
 
 .tab-btn {
   flex: 1;
-  padding: 7px 14px;
+  padding: 8px 12px;
   border-radius: 22px;
   border: none;
   background: transparent;
@@ -875,6 +888,10 @@ body::after {
   cursor: pointer;
   transition: all 0.25s ease;
   user-select: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
 .tab-btn.active {
@@ -984,6 +1001,10 @@ body::after {
   color: var(--text-muted);
   cursor: pointer;
   user-select: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
 
 .skip-typing-btn:active {
@@ -1009,6 +1030,10 @@ body::after {
   cursor: pointer;
   box-shadow: 0 3px 8px rgba(160, 40, 70, 0.1);
   transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
 .btn-jump-photos:active {
@@ -1067,16 +1092,22 @@ body::after {
   transition: transform 0.3s ease;
 }
 
-/* Four-Leaf Clover Sticker (Matches Reference Photo 🍀) */
+/* Four-Leaf Clover Sticker (Matches Reference Photo) */
 .clover-sticker {
   position: absolute;
-  top: -12px;
-  right: -6px;
-  font-size: 30px;
-  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
+  top: -14px;
+  right: -8px;
   z-index: 15;
   animation: floatClover 3s ease-in-out infinite alternate;
   pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clover-svg {
+  display: block;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.25));
 }
 
 @keyframes floatClover {
@@ -1463,6 +1494,53 @@ body::after {
     color: #ffffff;
     transform: scale(1.08);
   }
+}
+
+/* ========================================================
+   PROFESSIONAL VECTOR ICONS STYLING
+   ======================================================== */
+.icon-svg {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.tab-icon-svg {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.btn-icon-svg {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.btn-arrow-down-svg {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+  animation: bounceDown 1.5s infinite ease-in-out;
+}
+
+@keyframes bounceDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+}
+
+.sparkle-icon-svg {
+  display: inline-block;
+  vertical-align: middle;
+  animation: rotateSparkle 3.5s linear infinite;
+  filter: drop-shadow(0 2px 4px rgba(230, 150, 50, 0.35));
+  flex-shrink: 0;
+}
+
+@keyframes rotateSparkle {
+  0% { transform: rotate(0deg) scale(0.95); }
+  50% { transform: rotate(180deg) scale(1.15); }
+  100% { transform: rotate(360deg) scale(0.95); }
 }
 
 
