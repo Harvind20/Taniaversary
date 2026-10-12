@@ -911,11 +911,13 @@ body::after {
   box-shadow:
     0 15px 35px rgba(160, 40, 70, 0.14),
     0 3px 8px rgba(0, 0, 0, 0.04);
-  padding: 24px 18px 20px;
+  padding: 24px 18px 24px;
   width: 100%;
+  max-width: 580px;
+  margin: 0 auto 36px;
   position: relative;
   line-height: 1.8;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  box-sizing: border-box;
 }
 
 .parchment-letter.hidden-view {
@@ -1437,6 +1439,12 @@ body::after {
 
   .letter-content p {
     margin-bottom: 22px;
+  }
+
+  .parchment-letter {
+    max-width: 720px;
+    padding: 38px 36px 36px;
+    margin: 0 auto 52px;
   }
 
   /* Screen 4 (Scrapbook): 3-COLUMN AESTHETIC COLLAGE (Matches Reference Image 6!) */

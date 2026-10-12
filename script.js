@@ -521,67 +521,15 @@ let typewriterTimeouts = [];
 
 function initLetterEngine() {
   const btnReturn = document.getElementById("btnReturnEnvelope");
-  const btnSkip = document.getElementById("btnSkipTyping");
-  const tabLetterBtn = document.getElementById("tabLetterBtn");
-  const tabScrapbookBtn = document.getElementById("tabScrapbookBtn");
-  const parchmentLetter = document.getElementById("parchmentLetter");
-  const scrapbookSection = document.getElementById("scrapbookSection");
-  const btnJumpPhotos = document.getElementById("btnJumpPhotos");
-  const photoFileInput = document.getElementById("photoFileInput");
-
-  // Tab Switching
-  if (tabLetterBtn && tabScrapbookBtn) {
-    tabLetterBtn.addEventListener("click", () => {
-      tabLetterBtn.classList.add("active");
-      tabScrapbookBtn.classList.remove("active");
-      parchmentLetter.classList.remove("hidden-view");
-      scrapbookSection.classList.add("hidden-view");
-    });
-
-    tabScrapbookBtn.addEventListener("click", () => {
-      tabScrapbookBtn.classList.add("active");
-      tabLetterBtn.classList.remove("active");
-      scrapbookSection.classList.remove("hidden-view");
-      parchmentLetter.classList.add("hidden-view");
-    });
-  }
-
-  // Jump from letter directly to photos
-  if (btnJumpPhotos) {
-    btnJumpPhotos.addEventListener("click", () => {
-      if (tabScrapbookBtn) tabScrapbookBtn.click();
-      const wrapper = document.getElementById("letterScrollWrapper");
-      if (wrapper) wrapper.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  }
-
   // Populate Scrapbook Gallery (Matches Reference Collage)
   renderScrapbookGallery();
 
-  // Photo Upload Handler (Allows replacing photos live on device)
-  if (photoFileInput) {
-    photoFileInput.addEventListener("change", (e) => {
-      const files = Array.from(e.target.files);
-      if (files.length === 0) return;
-      const imgs = document.querySelectorAll(".scrapbook-item img");
-      files.forEach((file, idx) => {
-        if (imgs[idx]) {
-          imgs[idx].src = URL.createObjectURL(file);
-        }
-      });
-      playSuccessChime();
+  // Return to Envelope view
+  if (btnReturn) {
+    btnReturn.addEventListener("click", () => {
+      switchScreen("screen-letter", "screen-envelope");
     });
   }
-
-  // Return to Envelope view
-  btnReturn.addEventListener("click", () => {
-    switchScreen("screen-letter", "screen-envelope");
-  });
-
-  // Skip typing animation
-  btnSkip.addEventListener("click", () => {
-    skipTypewriter();
-  });
 }
 
 // Handle multi-format image loading with fallback
@@ -773,7 +721,8 @@ function startTypewriterAnimation() {
         typewriterTimeouts.push(t);
       } else {
         // Done typing!
-        document.getElementById("btnSkipTyping").style.display = "none";
+        const btnSkip = document.getElementById("btnSkipTyping");
+        if (btnSkip) btnSkip.style.display = "none";
       }
     }
     typeClosingChar();
@@ -804,7 +753,8 @@ function skipTypewriter() {
     typewriterBody.appendChild(closingP);
   }
 
-  document.getElementById("btnSkipTyping").style.display = "none";
+  const btnSkip = document.getElementById("btnSkipTyping");
+  if (btnSkip) btnSkip.style.display = "none";
 }
 
 // --------------------------------------------------------
