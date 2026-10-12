@@ -45,15 +45,15 @@ const CONFIG = {
 
   // ========================================================
   // 📸 PHOTO SCRAPBOOK / MEMORIES SECTION (Matches Reference Image)
-  // Place your photos in assets/images/ (photo1.jpg, photo2.jpg, etc.)
-  // or put web image URLs!
+  // Drop your photos directly into the "pictures" folder:
+  // photo1.jpg, photo2.jpg, photo3.jpg, photo4.jpg, photo5.jpg, photo6.jpg
   // ========================================================
   memoriesTitle: "Our Favorite Moments 💕",
   memoriesSubtitle: "Every picture tells our story",
   memories: [
     {
       id: 1,
-      image: "assets/images/photo1.jpg",
+      image: "pictures/photo1.jpg",
       caption: "Thank you for being my happiness, my comfort, and my favorite person.",
       style: "polaroid",
       sticker: "🍀",
@@ -61,7 +61,7 @@ const CONFIG = {
     },
     {
       id: 2,
-      image: "assets/images/photo2.jpg",
+      image: "pictures/photo2.jpg",
       caption: "Another month, another reason to be grateful for you.",
       style: "stamp", // Scalloped postage stamp edge!
       sticker: "🍀",
@@ -69,7 +69,7 @@ const CONFIG = {
     },
     {
       id: 3,
-      image: "assets/images/photo3.jpg",
+      image: "pictures/photo3.jpg",
       caption: "Here's to us and many more memories together.",
       style: "polaroid",
       sticker: "🍀",
@@ -77,7 +77,7 @@ const CONFIG = {
     },
     {
       id: 4,
-      image: "assets/images/photo4.jpg",
+      image: "pictures/photo4.jpg",
       caption: "I cherish every moment with you and can't wait to create more memories together. I love you!",
       style: "stamp", // Scalloped postage stamp edge!
       sticker: "🍀",
@@ -85,7 +85,7 @@ const CONFIG = {
     },
     {
       id: 5,
-      image: "assets/images/photo5.jpg",
+      image: "pictures/photo5.jpg",
       caption: "Every day with you is a blessing, and I'm excited for all the months ahead.",
       style: "stamp", // Scalloped postage stamp edge!
       sticker: "🍀",
@@ -93,7 +93,7 @@ const CONFIG = {
     },
     {
       id: 6,
-      image: "assets/images/photo6.jpg",
+      image: "pictures/photo6.jpg",
       caption: "Forever grateful for you and all of our little adventures together. 💕",
       style: "polaroid",
       sticker: "🍀",

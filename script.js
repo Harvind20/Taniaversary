@@ -535,6 +535,23 @@ function initLetterEngine() {
   });
 }
 
+// Handle multi-format image loading with fallback
+function attachImageFallback(img, originalSrc, index) {
+  let triedPng = false;
+  let triedJpeg = false;
+  img.onerror = () => {
+    if (!triedPng && originalSrc.endsWith(".jpg")) {
+      triedPng = true;
+      img.src = originalSrc.replace(".jpg", ".png");
+    } else if (!triedJpeg && originalSrc.endsWith(".png")) {
+      triedJpeg = true;
+      img.src = originalSrc.replace(".png", ".jpeg");
+    } else {
+      img.src = getPlaceholderImage(index);
+    }
+  };
+}
+
 // Render Scrapbook Collage matching reference image
 function renderScrapbookGallery() {
   const grid = document.getElementById("scrapbookGrid");
@@ -564,9 +581,9 @@ function renderScrapbookGallery() {
       const stampInner = document.createElement("div");
       stampInner.className = "stamp-inner-border";
       const img = document.createElement("img");
+      attachImageFallback(img, item.image, index);
       img.src = item.image;
       img.alt = "Anniversary Memory";
-      img.onerror = () => { img.src = getPlaceholderImage(index); };
       stampInner.appendChild(img);
       stampCard.appendChild(stampInner);
       itemEl.appendChild(stampCard);
@@ -575,9 +592,9 @@ function renderScrapbookGallery() {
       const polaroidCard = document.createElement("div");
       polaroidCard.className = "polaroid-card";
       const img = document.createElement("img");
+      attachImageFallback(img, item.image, index);
       img.src = item.image;
       img.alt = "Anniversary Memory";
-      img.onerror = () => { img.src = getPlaceholderImage(index); };
       polaroidCard.appendChild(img);
       itemEl.appendChild(polaroidCard);
     }
